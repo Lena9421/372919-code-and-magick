@@ -10,32 +10,38 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.textBaseline = 'bottom';
   ctx.fillText('Ура вы победили!', 150, 40);
   ctx.fillText('Список результатов:', 150, 60);
+  var indent = 50;    // px;
+  //координаты столбцов
+  var initialX = 120; // px;
+  var initialY = 80;  // px;
+  var histogramWidth = 40;
+  var lineHeight = 15;
   var max = -1;
-  var step = histogramWidth / max;
-  var histogramWidth = 150;
+  //высота столбца
+  var histogramHeight = 150;
   for (var i = 0; i < times.length; i++) {
-    //Начало, условие, шаг
-    //Начало: var i=0 выполняется один-единственный раз, при заходе в цикл.
-    //Условие: i < times.length; проверяется перед каждой итерацией и при входе в цикл, если оно нарушено, то происходит выход.
-    ctx.fillStyle = '#000000';
-    var barHeigth = 20; // px;
-    var indent = 50;    // px;
-    var initialX = 120; // px;
-    var initialY = 80;  // px;
-    var lineHeight = 15;
-    ctx.fillText(names[i], initialX + histogramWidth, initialY + lineHeight + indent * i);
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = ('rgba(255, 0, 0, 1)');
-    } else {
-      ctx.fillStyle = 'rgba(0, 0, 255,' + Math.random(1).toFixed(9) + ')';
+    var time = times[i];
+    if (time > max) {
+      max = time;
     }
-    ctx.fillRect(160 + 90 * i, 80, 40, 150);
-
   }
+  // шаг изменения столбика диаграммы
+  var step = histogramHeight / max;
+  for (var i = 0; i < times.length; i++) {
+    ctx.fillRect(initialX + (histogramWidth + indent)*i, initialY, histogramWidth,  times[i] * step);
+  //   ctx.fillText(names[i], initialX + times[i] * step, initialY + lineHeight + indent * i);
+  //   //цвет букв
+  //   ctx.fillStyle = '#000000';
+  //   //столбик результатов с координатами и высотой, пропорциональной результатам игрока
+  //   ctx.fillRect(120, 80, times [0] * step, 20);
+  //   if (names[i] === 'Вы') {
+  //     ctx.fillStyle = ('rgba(255, 0, 0, 1)');
+  //   } else {
+  //     ctx.fillStyle = 'rgba(0, 0, 255,' + Math.random().toFixed() + ')';
+  //   }
+  //   ctx.fillRect(160 + 90 * i, 80, 40, histogramHeight);
+  // }
 };
-var histogramHeight = time[i] * step;
-
-
 // В новом файле js/stat.js определите функцию renderStatistics, которая будет являться методом объекта window, со следующими параметрами:
 //
 //   ctx — канвас на котором рисуется игра.
