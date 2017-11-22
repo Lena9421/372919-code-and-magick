@@ -3,6 +3,13 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.beginPath();
   ctx.fillRect(100, 10, 420, 270);
   ctx.closePath();
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  ctx.beginPath();
+  ctx.fillRect(110, 280, 420, 10);
+  ctx.closePath();
+  ctx.beginPath();
+  ctx.fillRect(520, 20, 10, 260);
+  ctx.closePath();
   ctx.fillStyle = '#000';
   ctx.strokeStyle = '#000';
   ctx.strokeRect(100, 10, 420, 270);
@@ -10,9 +17,9 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.textBaseline = 'bottom';
   ctx.fillText('Ура вы победили!', 150, 40);
   ctx.fillText('Список результатов:', 150, 60);
-  var indent = 50;    // px;
-  var initialX = 160; // px;
-  var initialY = 240;  // px;
+  var indent = 50;
+  var initialX = 160;
+  var initialY = 240;
   var histogramWidth = 40;
   var histogramHeight = 150;
   var lineHeight = 25;
@@ -25,48 +32,23 @@ window.renderStatistics = function (ctx, names, times) {
   }
   // шаг изменения столбика диаграммы
   var step = histogramHeight / max;
+  var getRandomColor = function (min, max) {
+    return Math.random() * (max - min) + min;
+  };
   for (var i = 0; i < times.length; i++) {
-    ctx.fillStyle = 'red';
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = ('rgba(255, 0, 0, 1)');
+    } else {
+      ctx.fillStyle = 'rgba(52, 24, 227,' + Math.random() + ')';
+    }
     ctx.fillRect(initialX + (histogramWidth + indent) * i, initialY, histogramWidth, times[i] * -step);
     ctx.fillStyle = 'black';
-    ctx.fillText(names[i], initialX + (histogramWidth + indent) * i, initialY + lineHeight );
-    //   //столбик результатов с координатами и высотой, пропорциональной результатам игрока
-    //   ctx.fillRect(120, 80, times [0] * step, 20);
-    //   if (names[i] === 'Вы') {
-    //     ctx.fillStyle = ('rgba(255, 0, 0, 1)');
-    //   } else {
-    //     ctx.fillStyle = 'rgba(0, 0, 255,' + Math.random().toFixed() + ')';
-    //   }
-    //   ctx.fillRect(160 + 90 * i, 80, 40, histogramHeight);
-    // }
+    ctx.fillText(names[i], initialX + (histogramWidth + indent) * i, initialY + lineHeight);
+    ctx.fillText(times[i].toFixed(0), initialX + (histogramWidth + indent) * i, initialY - times[i] * step - lineHeight*0.2 );
   }
+
 };
-// В новом файле js/stat.js определите функцию renderStatistics, которая будет являться методом объекта window, со следующими параметрами:
-//
-//   ctx — канвас на котором рисуется игра.
-//
-//   names — массив, с именами игроков прошедших уровень. Имя самого игрока — Вы. Массив имен формируется случайным образом.
-//
-//   times — массив, по длине совпадающий с массивом names. Массив содержит время прохождения уровня соответствующего игрока из массива names. Время прохождения уровня задано в миллисекундах.
-//
-//   Эта функция будет вызываться каждый раз когда игрок проходит уровень. Чтобы успешно пройти уровень, надо выстрелить фаерболом (клавиша Shift) в забор.
-//
-//   При вызове этой функции на канвас ctx должны быть выведены следующие элементы:
-//
-//   Белое прямоугольное облако с координатами [100, 10] высотой 270px и шириной 420px. Облако может быть как правильным многоугольником, нарисованным методом fillRect, так и неправильным нарисованным с помощью методов beginPath, moveTo, closePath, fill и других.
-//
-//   Под облаком должна располагаться тень: многоугольник такой же формы, залитый цветом rgba(0, 0, 0, 0.7) (полупрозрачный чёрный), смещённый относительно белого на 10px вниз и вправо.
-//
-//   На облаке должен быть отрисован текст сообщения 'Ура вы победили!\nСписок результатов:' с помощью метода fillText. Текст должен быть набран шрифтом PT Mono размером 16px. NB! Особенностью отрисовки текста на канвасе является то, что он не поддерживает перенос, поэтому каждая новая строчка должна быть отрисована новым вызовом метода fillText или strokeText.
-//
-//   После сообщения о победе должна располагаться гистограмма времен участников. Параметры гистограммы следующие:
-//
-//   Высота гистограммы 150px.
-//
-//   Ширина колонки 40px.
-//
-//   Расстояние между колонками 50px.
-//
-//   Цвет колонки игрока Вы rgba(255, 0, 0, 1).
-//
-//   Цвета колонок других игроков — синие, а прозрачность задается случайным образом.
+// Под облаком должна располагаться тень: многоугольник
+// такой же формы, залитый цветом rgba(0, 0, 0, 0.7)
+// (полупрозрачный чёрный), смещённый относительно белого
+// на 10px вниз и вправо.
