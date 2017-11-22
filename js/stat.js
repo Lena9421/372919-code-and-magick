@@ -4,21 +4,19 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillRect(100, 10, 420, 270);
   ctx.closePath();
   ctx.fillStyle = '#000';
-  ctx.strokeStyle = '#F00';
+  ctx.strokeStyle = '#000';
   ctx.strokeRect(100, 10, 420, 270);
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'bottom';
   ctx.fillText('Ура вы победили!', 150, 40);
   ctx.fillText('Список результатов:', 150, 60);
   var indent = 50;    // px;
-  //координаты столбцов
-  var initialX = 120; // px;
-  var initialY = 80;  // px;
+  var initialX = 160; // px;
+  var initialY = 240;  // px;
   var histogramWidth = 40;
-  var lineHeight = 15;
-  var max = -1;
-  //высота столбца
   var histogramHeight = 150;
+  var lineHeight = 25;
+  var max = -1;
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
@@ -28,19 +26,20 @@ window.renderStatistics = function (ctx, names, times) {
   // шаг изменения столбика диаграммы
   var step = histogramHeight / max;
   for (var i = 0; i < times.length; i++) {
-    ctx.fillRect(initialX + (histogramWidth + indent)*i, initialY, histogramWidth,  times[i] * step);
-  //   ctx.fillText(names[i], initialX + times[i] * step, initialY + lineHeight + indent * i);
-  //   //цвет букв
-  //   ctx.fillStyle = '#000000';
-  //   //столбик результатов с координатами и высотой, пропорциональной результатам игрока
-  //   ctx.fillRect(120, 80, times [0] * step, 20);
-  //   if (names[i] === 'Вы') {
-  //     ctx.fillStyle = ('rgba(255, 0, 0, 1)');
-  //   } else {
-  //     ctx.fillStyle = 'rgba(0, 0, 255,' + Math.random().toFixed() + ')';
-  //   }
-  //   ctx.fillRect(160 + 90 * i, 80, 40, histogramHeight);
-  // }
+    ctx.fillStyle = 'red';
+    ctx.fillRect(initialX + (histogramWidth + indent) * i, initialY, histogramWidth, times[i] * -step);
+    ctx.fillStyle = 'black';
+    ctx.fillText(names[i], initialX + (histogramWidth + indent) * i, initialY + lineHeight );
+    //   //столбик результатов с координатами и высотой, пропорциональной результатам игрока
+    //   ctx.fillRect(120, 80, times [0] * step, 20);
+    //   if (names[i] === 'Вы') {
+    //     ctx.fillStyle = ('rgba(255, 0, 0, 1)');
+    //   } else {
+    //     ctx.fillStyle = 'rgba(0, 0, 255,' + Math.random().toFixed() + ')';
+    //   }
+    //   ctx.fillRect(160 + 90 * i, 80, 40, histogramHeight);
+    // }
+  }
 };
 // В новом файле js/stat.js определите функцию renderStatistics, которая будет являться методом объекта window, со следующими параметрами:
 //
