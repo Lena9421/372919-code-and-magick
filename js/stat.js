@@ -1,15 +1,17 @@
+'use strict';
 window.renderStatistics = function (ctx, names, times) {
+  var INDENT = 50;
+  var INITIAL_X = 160;
+  var INITIAL_Y = 240;
+  var HISTOGRAM_WIDTH = 40;
+  var HISTOGRAM_HEIGHT = 150;
+  var LINE_HEIGHT = 25;
+  var MAX_TIME = -1;
   ctx.fillStyle = 'white';
-  ctx.beginPath();
   ctx.fillRect(100, 10, 420, 270);
-  ctx.closePath();
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.beginPath();
   ctx.fillRect(110, 280, 420, 10);
-  ctx.closePath();
-  ctx.beginPath();
   ctx.fillRect(520, 20, 10, 260);
-  ctx.closePath();
   ctx.fillStyle = '#000';
   ctx.strokeStyle = '#000';
   ctx.strokeRect(100, 10, 420, 270);
@@ -17,38 +19,23 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.textBaseline = 'bottom';
   ctx.fillText('Ура вы победили!', 150, 40);
   ctx.fillText('Список результатов:', 150, 60);
-  var indent = 50;
-  var initialX = 160;
-  var initialY = 240;
-  var histogramWidth = 40;
-  var histogramHeight = 150;
-  var lineHeight = 25;
-  var max = -1;
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
-    if (time > max) {
-      max = time;
+    if (time > MAX_TIME) {
+      MAX_TIME = time;
     }
   }
-  // шаг изменения столбика диаграммы
-  var step = histogramHeight / max;
+  var step = HISTOGRAM_HEIGHT / MAX_TIME;
   var getRandomColor = function (min, max) {
     return Math.random() * (max - min) + min;
   };
-  for (var i = 0; i < times.length; i++) {
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = ('rgba(255, 0, 0, 1)');
-    } else {
-      ctx.fillStyle = 'rgba(52, 24, 227,' + Math.random() + ')';
-    }
-    ctx.fillRect(initialX + (histogramWidth + indent) * i, initialY, histogramWidth, times[i] * -step);
+  for (i = 0; i < times.length; i++) {
+    ctx.fillStyle = names[i] === 'Вы' ?
+      ctx.fillStyle = ('rgba(255, 0, 0, 1)') :
+      ctx.fillStyle = 'rgba(0, 0, 255,' + getRandomColor(0.1, 1) + ')';
+    ctx.fillRect(INITIAL_X + (HISTOGRAM_WIDTH + INDENT) * i, INITIAL_Y, HISTOGRAM_WIDTH, times[i] * -step);
     ctx.fillStyle = 'black';
-    ctx.fillText(names[i], initialX + (histogramWidth + indent) * i, initialY + lineHeight);
-    ctx.fillText(times[i].toFixed(0), initialX + (histogramWidth + indent) * i, initialY - times[i] * step - lineHeight*0.2 );
+    ctx.fillText(names[i], INITIAL_X + (HISTOGRAM_WIDTH + INDENT) * i, INITIAL_Y + LINE_HEIGHT);
+    ctx.fillText(times[i].toFixed(0), INITIAL_X + (HISTOGRAM_WIDTH + INDENT) * i, INITIAL_Y - times[i] * step - LINE_HEIGHT * 0.2);
   }
-
 };
-// Под облаком должна располагаться тень: многоугольник
-// такой же формы, залитый цветом rgba(0, 0, 0, 0.7)
-// (полупрозрачный чёрный), смещённый относительно белого
-// на 10px вниз и вправо.
