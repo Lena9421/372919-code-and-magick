@@ -6,7 +6,7 @@ window.renderStatistics = function (ctx, names, times) {
   var HISTOGRAM_WIDTH = 40;
   var HISTOGRAM_HEIGHT = 150;
   var LINE_HEIGHT = 25;
-  var MAX_TIME = -1;
+  var maxTime = -1;
   ctx.fillStyle = 'white';
   ctx.fillRect(100, 10, 420, 270);
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -21,11 +21,11 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 150, 60);
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
-    if (time > MAX_TIME) {
-      MAX_TIME = time;
+    if (time > maxTime) {
+      maxTime = time;
     }
   }
-  var step = HISTOGRAM_HEIGHT / MAX_TIME;
+  var step = HISTOGRAM_HEIGHT / maxTime;
   var getRandomColor = function (min, max) {
     return Math.random() * (max - min) + min;
   };
