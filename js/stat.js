@@ -1,4 +1,5 @@
 'use strict';
+
 window.renderStatistics = function (ctx, names, times) {
   var INDENT = 50;
   var INITIAL_X = 160;
