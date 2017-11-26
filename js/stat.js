@@ -31,9 +31,7 @@ window.renderStatistics = function (ctx, names, times) {
     return Math.random() * (max - min) + min;
   };
   for (i = 0; i < times.length; i++) {
-    ctx.fillStyle = names[i] === 'Вы' ?
-      ctx.fillStyle = ('rgba(255, 0, 0, 1)') :
-      ctx.fillStyle = 'rgba(0, 0, 255,' + getRandomColor(0.1, 1) + ')';
+    ctx.fillStyle = names[i] === 'Вы' ? ctx.fillStyle = ('rgba(255, 0, 0, 1)') : ctx.fillStyle = 'rgba(0, 0, 255,' + getRandomColor(0.1, 1) + ')';
     ctx.fillRect(INITIAL_X + (HISTOGRAM_WIDTH + INDENT) * i, INITIAL_Y, HISTOGRAM_WIDTH, times[i] * -step);
     ctx.fillStyle = 'black';
     ctx.fillText(names[i], INITIAL_X + (HISTOGRAM_WIDTH + INDENT) * i, INITIAL_Y + LINE_HEIGHT);
