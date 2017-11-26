@@ -6,7 +6,7 @@ var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)
 var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 // Функция выбирающая случайный элемент из массива (формула)
-var getRandomNumber = function(arr) {
+var getRandomNumber = function (arr) {
   return Math.floor(Math.random() * (arr.length));
 };
 // Функция генерирующая набор свойств мага
@@ -19,7 +19,7 @@ var generateWizard = function () {
 };
 // создадим цикл, который  добавляет объекты(магов с их рандомными свойствами) в массив(allWizards);
 // обернем массив и цикл в функцию, которая будет возвращать нам массив объектов (магов);
-var getAllWizards = function() {
+var getAllWizards = function () {
   var allWizards = [];
   for (var i = 0; i < 4; i++) {
     allWizards.push(generateWizard());
