@@ -1,4 +1,9 @@
 'use strict';
+
+// покажем блок настроек
+var userDialog = document.querySelector('.setup');
+userDialog.classList.remove('hidden');
+
 // Исходные данные
 var WIZARD_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_SURNAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -9,6 +14,7 @@ var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 var getRandomNumber = function (arr) {
   return Math.floor(Math.random() * (arr.length));
 };
+
 // Функция генерирующая набор свойств мага
 var generateWizard = function () {
   return {
@@ -17,15 +23,18 @@ var generateWizard = function () {
     eyesColor: EYES_COLOR[getRandomNumber(EYES_COLOR)]
   };
 };
+
 // создадим цикл, который  добавляет объекты(магов с их рандомными свойствами) в массив(allWizards);
 // обернем массив и цикл в функцию, которая будет возвращать нам массив объектов (магов);
 var getAllWizards = function () {
   var allWizards = [];
-  for (var i = 0; i < 4; i++) {
+  var WIZARD_AMOUNT = 4;
+  for (var i = 0; i < WIZARD_AMOUNT; i++) {
     allWizards.push(generateWizard());
   }
   return allWizards;
 };
+
 // создадим переменную которая содержит в себе все значения функции  getAllWizards
 var wizards = getAllWizards();
 
@@ -43,14 +52,14 @@ var renderWizard = function () {
 };
 // создадим цикл, который отрисовывает сразу 4 мага
 // обернем его в функцию
-
+// var addAllWizards = function () {
 var fragment = document.createDocumentFragment();
 for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
 }
-// покажем блок настроек
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+// return similarListElement.appendChild(fragment);
+// };
+// addAllWizards();
 similarListElement.appendChild(fragment);
 userDialog.querySelector('.setup-similar').classList.remove('hidden');
 
