@@ -4,6 +4,8 @@
 var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 
+var similarListElement = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 // Исходные данные
 var WIZARD_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_SURNAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -11,7 +13,7 @@ var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)
 var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 
 // Функция выбирающая случайный элемент из массива (формула)
-var getRandomNumber = function (arr) {
+var getRandomNumber = function () {
   return Math.floor(Math.random() * (arr.length));
 };
 
@@ -38,8 +40,6 @@ var getAllWizards = function () {
 // создадим переменную которая содержит в себе все значения функции  getAllWizards
 var wizards = getAllWizards();
 
-var similarListElement = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 // клонируем переменную similarWizardTemplate, которая представляет собой некий .content и помещаем ее в wizardElement
 // запишем все в цикл, который пройдет по массиву wizards и передаст значения
 // обернем все в функцию renderWizard которая вернет нам готовый шаблон
