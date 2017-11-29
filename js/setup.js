@@ -8,23 +8,23 @@ var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
 // Исходные данные
-var WIZARD_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var WIZARD_SURNAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
-
+var WizardProperties = {
+  NAME: ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],
+  SURNAME: ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'],
+  COAT_COLOR: ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'],
+  EYES_COLOR: ['black', 'red', 'blue', 'yellow', 'green']
+};
 // Функция выбирающая случайный элемент из массива (формула)
-var arr = [];
-var getRandomNumber = function () {
+var getRandomNumber = function (arr) {
   return Math.floor(Math.random() * (arr.length));
 };
 
 // Функция генерирующая набор свойств мага
 var generateWizard = function () {
   return {
-    name: WIZARD_NAME[getRandomNumber(WIZARD_NAME)] + ' ' + WIZARD_SURNAME[getRandomNumber(WIZARD_SURNAME)],
-    coatColor: COAT_COLOR[getRandomNumber(COAT_COLOR)],
-    eyesColor: EYES_COLOR[getRandomNumber(EYES_COLOR)]
+    name: WizardProperties.NAME[getRandomNumber(WizardProperties.NAME)] + ' ' + WizardProperties.SURNAME[getRandomNumber(WizardProperties.SURNAME)],
+    coatColor: WizardProperties.COAT_COLOR[getRandomNumber(WizardProperties.COAT_COLOR)],
+    eyesColor: WizardProperties.EYES_COLOR[getRandomNumber(WizardProperties.EYES_COLOR)]
   };
 };
 
